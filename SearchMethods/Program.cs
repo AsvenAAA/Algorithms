@@ -10,7 +10,8 @@ namespace SearchMethods
     {
         static void Main(string[] args)
         {
-            Console.WriteLine();
+            Program p = new Program();
+            p.EvenOddSorting();
             Console.ReadKey();
         }
 
@@ -88,6 +89,60 @@ namespace SearchMethods
                 }
 
                 lengthArray -= 1;
+            }
+
+            Console.WriteLine("\nAfter");
+            for (int i = 0; i < randomArray.Length; i++)
+                Console.WriteLine(randomArray[i]);
+        }
+        #endregion
+
+        #region EvenOddSorting
+        public void EvenOddSorting()
+        {
+            int[] randomArray = new int[10];
+            Random rnd = new Random();
+            for (int i = 0; i < randomArray.Length; i++)
+            {
+                randomArray[i] = rnd.Next(-100, 100);
+            }
+
+            Console.WriteLine("Before");
+            for (int i = 0; i < randomArray.Length; i++)
+                Console.WriteLine(randomArray[i]);
+            int countF = 0;
+            int countS = 0;
+            while (true)
+            {
+                for (int i = 0, j = i + 1; i < randomArray.Length & j < randomArray.Length; i++, j++)
+                {
+                    if (i % 2 != 0)
+                    {
+                        if (randomArray[i] > randomArray[j])
+                        {
+                            int permutation = randomArray[i];
+                            randomArray[i] = randomArray[j];
+                            randomArray[j] = permutation;
+                            countF += 1;
+                        }
+                    }
+                }
+                for (int i = 0, j = i + 1; i < randomArray.Length & j < randomArray.Length; i++, j++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        if (randomArray[i] > randomArray[j])
+                        {
+                            int permutation = randomArray[i];
+                            randomArray[i] = randomArray[j];
+                            randomArray[j] = permutation;
+                            countF += 1;
+                        }
+                    }
+                }
+                if (countF > countS)
+                    countS = countF;
+                else break;
             }
 
             Console.WriteLine("\nAfter");
