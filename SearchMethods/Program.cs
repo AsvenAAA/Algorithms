@@ -3,31 +3,65 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+
 
 namespace SearchMethods
 {
     class Program
     {
+        public static int ArrayLen { get; set; }
+
         static void Main(string[] args)
         {
-            Program p = new Program();
-            p.EvenOddSorting();
+            Program sortingAlgorithms = new Program();
+            ArrayLen = 30000;
+
+            sortingAlgorithms.BubbleSorting(ArrayLen);
+            sortingAlgorithms.ShakerSorting(ArrayLen);
+            sortingAlgorithms.EvenOddSorting(ArrayLen);
+
+            sortingAlgorithms.NativeFastSorting(ArrayLen);
+
             Console.ReadKey();
         }
 
-        #region BubbleSorting
-        public void BubbleSorting()
+        public void NativeFastSorting(int lArray)
         {
-            int[] randomArray = new int[10];
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int[] randomArray = new int[lArray];
+            Random rnd = new Random();
+            for (int i = 0; i < randomArray.Length; i++)
+            {
+                randomArray[i] = rnd.Next(-1000, 1000);
+            }
+
+            Array.Sort(randomArray);
+
+            timer.Stop();
+
+            Console.WriteLine("Native fast sorting: {0}", timer.ElapsedMilliseconds / 100.0);
+
+        }
+
+        #region BubbleSorting
+        public void BubbleSorting(int lArray)
+        {
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int[] randomArray = new int[lArray];
             Random rnd = new Random();
             for(int i = 0; i < randomArray.Length; i++)
             {
-                randomArray[i] = rnd.Next(-100, 100);
+                randomArray[i] = rnd.Next(-1000, 1000);
             }
 
-            Console.WriteLine("Before");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("Before");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
 
             int lengthArray = randomArray.Length;
             while (lengthArray != 0)
@@ -44,25 +78,31 @@ namespace SearchMethods
                 lengthArray -= 1;
             }
 
-            Console.WriteLine("\nAfter");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("\nAfter");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
+
+            timer.Stop();
+            Console.WriteLine("Bubble sorting time: {0}", timer.ElapsedMilliseconds / 100.0);
         }
         #endregion
 
         #region ShakerSorting
-        public void ShakerSorting()
+        public void ShakerSorting(int lArray)
         {
-            int[] randomArray = new int[10];
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int[] randomArray = new int[lArray];
             Random rnd = new Random();
             for (int i = 0; i < randomArray.Length; i++)
             {
-                randomArray[i] = rnd.Next(-100, 100);
+                randomArray[i] = rnd.Next(-1000, 1000);
             }
 
-            Console.WriteLine("Before");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("Before");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
 
             int lengthArray = randomArray.Length;
             int buff = 0;
@@ -91,33 +131,37 @@ namespace SearchMethods
                 lengthArray -= 1;
             }
 
-            Console.WriteLine("\nAfter");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("\nAfter");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
+
+            timer.Stop();
+            Console.WriteLine("Shaker sorting time: {0}", timer.ElapsedMilliseconds / 100.0);
         }
         #endregion
 
         #region EvenOddSorting
-        public void EvenOddSorting()
+        public void EvenOddSorting(int lArray)
         {
-            int[] randomArray = new int[10];
+            Stopwatch timer = new Stopwatch();
+            timer.Start();
+
+            int[] randomArray = new int[lArray];
             Random rnd = new Random();
             for (int i = 0; i < randomArray.Length; i++)
             {
-                randomArray[i] = rnd.Next(-100, 100);
+                randomArray[i] = rnd.Next(-1000, 1000);
             }
 
-            Console.WriteLine("Before");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("Before");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
             int countF = 0;
             int countS = 0;
             while (true)
             {
-                for (int i = 0, j = i + 1; i < randomArray.Length & j < randomArray.Length; i++, j++)
+                for (int i = 1, j = i + 1; i < randomArray.Length & j < randomArray.Length; i += 2, j += 2)
                 {
-                    if (i % 2 != 0)
-                    {
                         if (randomArray[i] > randomArray[j])
                         {
                             int permutation = randomArray[i];
@@ -125,12 +169,9 @@ namespace SearchMethods
                             randomArray[j] = permutation;
                             countF += 1;
                         }
-                    }
                 }
-                for (int i = 0, j = i + 1; i < randomArray.Length & j < randomArray.Length; i++, j++)
+                for (int i = 0, j = i + 1; i < randomArray.Length & j < randomArray.Length; i += 2, j += 2)
                 {
-                    if (i % 2 == 0)
-                    {
                         if (randomArray[i] > randomArray[j])
                         {
                             int permutation = randomArray[i];
@@ -138,16 +179,18 @@ namespace SearchMethods
                             randomArray[j] = permutation;
                             countF += 1;
                         }
-                    }
                 }
                 if (countF > countS)
                     countS = countF;
                 else break;
             }
 
-            Console.WriteLine("\nAfter");
-            for (int i = 0; i < randomArray.Length; i++)
-                Console.WriteLine(randomArray[i]);
+            //Console.WriteLine("\nAfter");
+            //for (int i = 0; i < randomArray.Length; i++)
+            //    Console.WriteLine(randomArray[i]);
+
+            timer.Stop();
+            Console.WriteLine("Even-odd sorting time: {0}", timer.ElapsedMilliseconds / 100.0);
         }
         #endregion
     }
