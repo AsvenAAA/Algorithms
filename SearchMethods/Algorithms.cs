@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace SearchMethods
 {
@@ -194,5 +195,57 @@ namespace SearchMethods
             Console.WriteLine("Comb sorting time: {0}", timer.ElapsedMilliseconds / 100.0);
         }
         #endregion
+    }
+
+    class ReversePolishEntryAlgorithms
+    {
+        private string sExpression;
+        public string Expression
+        {
+            get { return sExpression; }
+            set
+            {
+                sExpression = value;
+            }
+        }
+
+        //static class StackMaster
+        //{
+        //    public static string PeekMaster()
+        //    {
+
+        //    }
+
+        //    public static string PopMaster()
+        //    {
+
+        //    }
+
+        //    public static void PushMaster()
+        //    {
+
+        //    }
+        //}
+
+        public ReversePolishEntry(string sInputExpression)
+        {
+            Expression = sInputExpression;
+        }
+
+        public void ShowAnsver()
+        {
+
+        }
+
+        public string ExpressionTransformer()
+        {
+            string sReversePolishEntry = new string;
+
+        }
+
+        public double Calculate(string sTransformExpression)
+        {
+
+        }
     }
 }
