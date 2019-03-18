@@ -227,25 +227,25 @@ namespace SearchMethods
         //    }
         //}
 
-        public ReversePolishEntry(string sInputExpression)
-        {
-            Expression = sInputExpression;
-        }
+        //public ReversePolishEntry(string sInputExpression)
+        //{
+        //    Expression = sInputExpression;
+        //}
 
-        public void ShowAnsver()
-        {
+        //public void ShowAnsver()
+        //{
 
-        }
+        //}
 
-        public string ExpressionTransformer()
-        {
-            string sReversePolishEntry = new string;
+        //public string ExpressionTransformer()
+        //{
+        //    string sReversePolishEntry = new string;
 
-        }
+        //}
 
-        public double Calculate(string sTransformExpression)
-        {
+        //public double Calculate(string sTransformExpression)
+        //{
 
-        }
+        //}
     }
 }

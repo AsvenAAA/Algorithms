@@ -47,6 +47,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Algorithms.cs" />
+    <Compile Include="ReversePolishEntry.cs" />
     <Compile Include="SortingAlgorithms.cs" />
   </ItemGroup>
   <ItemGroup>
