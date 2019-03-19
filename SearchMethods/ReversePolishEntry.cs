@@ -26,13 +26,6 @@ namespace SearchMethods
         public void RPEformer(string expression)
         {
             StringBuilder sRPE = new StringBuilder();
-            int nOperandsNumber = 0;
-            for(int i = 0; i < expression.Length; i++)
-            {
-                if ("+/*-()".Contains(expression[i]))
-                    nOperandsNumber++;
-            }
-
             Stack<string> operandsStack = new Stack<string>(Expression.Length);
 
             for (int substringNumb = 0; substringNumb < expression.Length; substringNumb++)
@@ -49,25 +42,36 @@ namespace SearchMethods
                     {
                         if (PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                             operandsStack.Push(expression[substringNumb].ToString());
-                        while (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
+                        else if (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
                         {
-                            switch (operandsStack.Peek().ToString())
+                            while (operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
-                                case "(":
-                                    operandsStack.Pop();
-                                    Console.WriteLine("The '(' Pop");
-                                    break;
-                                case ")":
-                                    operandsStack.Pop();
-                                    Console.WriteLine("The ')' Pop");
-                                    break;
-                                default:
-                                    Console.WriteLine("Default Pop: {0}", operandsStack.Peek());
-                                    sRPE.Append(operandsStack.Pop());
-                                    break;
+                                sRPE.Append(operandsStack.Pop());
                             }
+                            operandsStack.Push(expression[substringNumb].ToString());
                         }
-                        operandsStack.Push(expression[substringNumb].ToString());
+                        //switch (operandsStack.Peek().ToString())
+                        //{
+                        //    case "(":
+                        //        operandsStack.Pop();
+                        //        Console.WriteLine("The '(' Pop");
+                        //        break;
+                        //    case ")":
+                        //        operandsStack.Pop();
+                        //        Console.WriteLine("The ')' Pop");
+                        //        break;
+                        //    default:
+                        //        Console.WriteLine("Default Pop: {0}", operandsStack.Peek());
+                        //        sRPE.Append(operandsStack.Pop());
+                        //        operandsStack.Push(expression[substringNumb].ToString());
+                        //        break;
+                    }
+                }
+                if(substringNumb == expression.Length - 1)
+                {
+                    while(operandsStack.Count != 0 )
+                    {
+                        sRPE.Append(operandsStack.Pop());
                     }
                 }
             }
