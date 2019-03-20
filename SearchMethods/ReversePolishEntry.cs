@@ -41,7 +41,18 @@ namespace SearchMethods
                     else
                     {
                         if (PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
-                            operandsStack.Push(expression[substringNumb].ToString());
+                        {
+                            while(operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
+                            {
+                                switch(operandsStack.Peek().ToString)
+                                    case "(":
+                                        break;
+                                        
+
+                                operandsStack.Push(expression[substringNumb].ToString());                           
+
+                            }
+                        }
                         else if (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
                         {
                             while (operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
@@ -75,7 +86,6 @@ namespace SearchMethods
                     }
                 }
             }
-
             Console.WriteLine(sRPE);
         }
 
