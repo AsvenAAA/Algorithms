@@ -23,7 +23,7 @@ namespace SearchMethods
 
             //sortingAlgorithms.NativeFastSorting(sortingAlgorithms.ArrayBuilder(sortingAlgorithms.ArrayLen));
 
-            ReversePolishEntry rpe = new ReversePolishEntry("5+4*6");
+            ReversePolishEntry rpe = new ReversePolishEntry("(5+4)*2");
             rpe.RPEformer(rpe.Expression);
 
             Console.ReadKey();

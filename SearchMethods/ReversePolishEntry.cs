@@ -44,13 +44,27 @@ namespace SearchMethods
                         {
                             while(operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
-                                switch(operandsStack.Peek().ToString)
+                                switch(expression[substringNumb].ToString())
+                                {
                                     case "(":
+                                        operandsStack.Pop();
                                         break;
-                                        
-
-                                operandsStack.Push(expression[substringNumb].ToString());                           
-
+                                    case ")":
+                                        while(operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
+                                        {
+                                            sRPE.Append(operandsStack.Pop());
+                                        }
+                                        if(operandsStack.Peek() != "(")
+                                            operandsStack.Pop();
+                                        break;
+                                    default:
+                                        if(operandsStack.Peek() != "(")
+                                            sRPE.Append(operandsStack.Pop());
+                                        break;
+                                }
+                                operandsStack.Push(expression[substringNumb].ToString());
+                                if(operandsStack.Peek() == "(")
+                                    operandsStack.Pop();
                             }
                         }
                         else if (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
@@ -58,6 +72,8 @@ namespace SearchMethods
                             while (operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
                                 sRPE.Append(operandsStack.Pop());
+                                if(operandsStack.Peek() == "(")
+                                    operandsStack.Pop();
                             }
                             operandsStack.Push(expression[substringNumb].ToString());
                         }
@@ -100,7 +116,7 @@ namespace SearchMethods
                     case '*': return 2;
                     case '/': return 2;
                     case '(': return 0;
-                    case ')': return 0;
+                    case ')': return 3;
                     default: throw new Exception("There is no such operation in the program!");
                 }
             }
