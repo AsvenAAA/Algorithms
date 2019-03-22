@@ -57,7 +57,7 @@ namespace SearchMethods
                                         if(operandsStack.Peek() != "(")
                                             operandsStack.Pop();
                                         break;
-                                    default:
+                                    default:1
                                         if(operandsStack.Peek() != "(")
                                             sRPE.Append(operandsStack.Pop());
                                         break;
