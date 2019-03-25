@@ -52,7 +52,7 @@ namespace SearchMethods
                                         {
                                              sRPE.Append(operandsStack.Pop());
                                         }
-                                        //if (operandsStack.Peek() == "(")
+                                        if (operandsStack.Peek() == "(")
                                             operandsStack.Pop();
                                         break;
                                     default:
