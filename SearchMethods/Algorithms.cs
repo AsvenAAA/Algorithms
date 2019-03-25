@@ -208,44 +208,5 @@ namespace SearchMethods
                 sExpression = value;
             }
         }
-
-        //static class StackMaster
-        //{
-        //    public static string PeekMaster()
-        //    {
-
-        //    }
-
-        //    public static string PopMaster()
-        //    {
-
-        //    }
-
-        //    public static void PushMaster()
-        //    {
-
-        //    }
-        //}
-
-        //public ReversePolishEntry(string sInputExpression)
-        //{
-        //    Expression = sInputExpression;
-        //}
-
-        //public void ShowAnsver()
-        //{
-
-        //}
-
-        //public string ExpressionTransformer()
-        //{
-        //    string sReversePolishEntry = new string;
-
-        //}
-
-        //public double Calculate(string sTransformExpression)
-        //{
-
-        //}
     }
 }

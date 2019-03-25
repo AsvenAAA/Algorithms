@@ -14,7 +14,7 @@ namespace SearchMethods
         static void Main(string[] args)
         {
 
-            SortingAlgorithms sortingAlgorithms = new SortingAlgorithms(30000);
+            SortingAlgorithms sortingAlgorithms = new SortingAlgorithms(3000000);
 
             //sortingAlgorithms.BubbleSorting(sortingAlgorithms.ArrayBuilder(sortingAlgorithms.ArrayLen));
             //sortingAlgorithms.ShakerSorting(sortingAlgorithms.ArrayBuilder(sortingAlgorithms.ArrayLen));
@@ -23,7 +23,7 @@ namespace SearchMethods
 
             //sortingAlgorithms.NativeFastSorting(sortingAlgorithms.ArrayBuilder(sortingAlgorithms.ArrayLen));
 
-            ReversePolishEntry rpe = new ReversePolishEntry("(5+4)*2");
+            ReversePolishEntry rpe = new ReversePolishEntry("5*(8+6)");
             rpe.RPEformer(rpe.Expression);
 
             Console.ReadKey();
