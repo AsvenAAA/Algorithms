@@ -54,7 +54,7 @@ namespace SearchMethods
                                 //        }
                                 //        if (operandsStack.Count != 0 && operandsStack.Peek() == "(")
                                 //            operandsStack.Pop();
-                                //        break;
+                                //        break;1
                                 //    default:
                                 //        operandsStack.Push(expression[substringNumb].ToString());
                                 //        break;
