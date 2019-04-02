@@ -30,6 +30,7 @@ namespace SearchMethods
 
             for (int substringNumb = 0; substringNumb < expression.Length; substringNumb++)
             {
+                string checker = expression[substringNumb].ToString();
                 if ("0123456789".Contains(expression[substringNumb]))
                 {
                     sRPE.Append(expression[substringNumb]);
@@ -44,21 +45,34 @@ namespace SearchMethods
                         {
                             while(operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
-                                string check = expression[substringNumb].ToString();
-                                switch(expression[substringNumb].ToString())
+                                //switch(expression[substringNumb].ToString())
+                                //{
+                                //    case ")":
+                                //        while(operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
+                                //        {
+                                //             sRPE.Append(operandsStack.Pop());
+                                //        }
+                                //        if (operandsStack.Count != 0 && operandsStack.Peek() == "(")
+                                //            operandsStack.Pop();
+                                //        break;
+                                //    default:
+                                //        operandsStack.Push(expression[substringNumb].ToString());
+                                //        break;
+                                //}
+
+                                if(expression[substringNumb].ToString() == ")")
                                 {
-                                    case ")":
-                                        while(operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
-                                        {
-                                             sRPE.Append(operandsStack.Pop());
-                                        }
-                                        if (operandsStack.Peek() == "(")
-                                            operandsStack.Pop();
+                                    while (operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
+                                    {
+                                        sRPE.Append(operandsStack.Pop());
+                                    }
+                                    if (operandsStack.Count != 0 && operandsStack.Peek() == "(")
+                                    {
+                                        operandsStack.Pop();
                                         break;
-                                    default:
-                                        operandsStack.Push(expression[substringNumb].ToString());
-                                        break;
+                                    }
                                 }
+                                else operandsStack.Push(expression[substringNumb].ToString());
                             }
                         }
                         else if (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
