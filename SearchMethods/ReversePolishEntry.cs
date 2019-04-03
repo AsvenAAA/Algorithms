@@ -45,21 +45,6 @@ namespace SearchMethods
                         {
                             while(operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
-                                //switch(expression[substringNumb].ToString())
-                                //{
-                                //    case ")":
-                                //        while(operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
-                                //        {
-                                //             sRPE.Append(operandsStack.Pop());
-                                //        }
-                                //        if (operandsStack.Count != 0 && operandsStack.Peek() == "(")
-                                //            operandsStack.Pop();
-                                //        break;1
-                                //    default:
-                                //        operandsStack.Push(expression[substringNumb].ToString());
-                                //        break;
-                                //}
-
                                 if(expression[substringNumb].ToString() == ")")
                                 {
                                     while (operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
