@@ -23,7 +23,7 @@ namespace SearchMethods
             this.Expression = Expression;
         }
 
-        public void RPEformer(string expression)
+        public string RPEformer(string expression)
         {
             StringBuilder sRPE = new StringBuilder();
             Stack<string> operandsStack = new Stack<string>(Expression.Length);
@@ -37,6 +37,8 @@ namespace SearchMethods
                 }
                 else
                 {
+                    if ("+-*/".Contains(expression[substringNumb]))
+                        sRPE.Append(" ");
                     if (operandsStack.Count == 0)
                         operandsStack.Push(expression[substringNumb].ToString());
                     else
@@ -79,7 +81,8 @@ namespace SearchMethods
                     }
                 }
             }
-            Console.WriteLine(sRPE);
+            //Console.WriteLine(sRPE);
+            return sRPE.ToString();
         }
 
         public byte PriorityChecker(char symbol)
@@ -94,6 +97,22 @@ namespace SearchMethods
                  case ')': return 3;
                  default: throw new Exception("There is no such operation in the program!");
              }
+        }
+
+        public double Calculate(string reversePolishEntry)
+        {
+            StringBuilder expressionOperator = new StringBuilder();
+            List<string> operators = new List<string>();
+            double memoryNumb;
+
+            for(int symbolNumb = 0; symbolNumb < reversePolishEntry.Length; symbolNumb++)
+            {
+                if("0123456789".Contains(reversePolishEntry[symbolNumb]))
+                {
+                    expressionOperator.Append(reversePolishEntry[symbolNumb]);
+                }
+                else if("+-*/".Contains())
+            }
         }
     }
 }
