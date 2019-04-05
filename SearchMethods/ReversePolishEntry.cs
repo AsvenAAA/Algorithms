@@ -99,20 +99,76 @@ namespace SearchMethods
              }
         }
 
+        public double Add(double x, double y)
+        {
+            double temp = x;
+            x = y;
+            y = temp;
+            return x + y;
+        }
+        public double Sub(double x, double y)
+        {
+            double temp = x;
+            x = y;
+            y = temp;
+            return x - y;
+        }
+        public double Mult(double x, double y)
+        {
+            double temp = x;
+            x = y;
+            y = temp;
+            return x * y;
+        }
+        public double Div(double x, double y)
+        {
+            double temp = x;
+            x = y;
+            y = temp;
+            return x / y;
+        }
+
         public double Calculate(string reversePolishEntry)
         {
             StringBuilder expressionOperator = new StringBuilder();
-            List<string> operators = new List<string>();
+            Stack<string> operators = new Stack<string>();
             double memoryNumb;
 
-            for(int symbolNumb = 0; symbolNumb < reversePolishEntry.Length; symbolNumb++)
+            for (int symbolNumb = 0; symbolNumb < reversePolishEntry.Length; symbolNumb++)
             {
-                if("0123456789".Contains(reversePolishEntry[symbolNumb]))
+                if ("0123456789".Contains(reversePolishEntry[symbolNumb]))
                 {
-                    expressionOperator.Append(reversePolishEntry[symbolNumb]);
+                    expressionOperator.Append(reversePolishEntry[symbolNumb]); if (symbolNumb < reversePolishEntry.Length & "+-*/".Contains(reversePolishEntry[symbolNumb + 1]))
+                    {
+                        operators.Push(expressionOperator.ToString());
+                        expressionOperator.Clear();
+                    }
                 }
-                else if("+-*/".Contains())
+                else if (expressionOperator.Length > 0 & reversePolishEntry[symbolNumb] == ' ')
+                {
+                    operators.Push(expressionOperator.ToString());
+                    expressionOperator.Clear();
+                }
+                else if ("+-*/".Contains(reversePolishEntry[symbolNumb]))
+                {
+                    switch (reversePolishEntry[symbolNumb])
+                    {
+                        case '+':
+                            operators.Push(Add(double.Parse(operators.Pop()), double.Parse(operators.Pop())).ToString());
+                            break;
+                        case '-':
+                            operators.Push(Sub(double.Parse(operators.Pop()), double.Parse(operators.Pop())).ToString());
+                            break;
+                        case '*':
+                            operators.Push(Mult(double.Parse(operators.Pop()), double.Parse(operators.Pop())).ToString());
+                            break;
+                        case '/':
+                            operators.Push(Div(double.Parse(operators.Pop()), double.Parse(operators.Pop())).ToString());
+                            break;
+                    }
+                }
             }
+            return double.Parse(operators.Pop());
         }
     }
 }
