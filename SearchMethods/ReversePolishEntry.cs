@@ -27,33 +27,31 @@ namespace SearchMethods
         {
             StringBuilder sRPE = new StringBuilder();
             Stack<string> operandsStack = new Stack<string>(Expression.Length);
+            byte zeroLength = 0;
 
             for (int substringNumb = 0; substringNumb < expression.Length; substringNumb++)
             {
-                string checker = expression[substringNumb].ToString();
                 if ("0123456789".Contains(expression[substringNumb]))
                 {
                     sRPE.Append(expression[substringNumb]);
                 }
                 else
                 {
-                    if ("+-*/".Contains(expression[substringNumb]))
-                        sRPE.Append(" ");
-                    if (operandsStack.Count == 0)
-                        operandsStack.Push(expression[substringNumb].ToString());
+                    if ("+-*/".Contains(expression[substringNumb])) sRPE.Append(" ");
+                    if (operandsStack.Count == zeroLength) operandsStack.Push(expression[substringNumb].ToString());
                     else
                     {
                         if (PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                         {
-                            while(operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
+                            while(operandsStack.Count != zeroLength && PriorityChecker(expression[substringNumb]) > PriorityChecker(char.Parse(operandsStack.Peek())))
                             {
                                 if(expression[substringNumb].ToString() == ")")
                                 {
-                                    while (operandsStack.Count != 0 && operandsStack.Peek().ToString() != "(")
+                                    while (operandsStack.Count != zeroLength && operandsStack.Peek().ToString() != "(")
                                     {
                                         sRPE.Append(operandsStack.Pop());
                                     }
-                                    if (operandsStack.Count != 0 && operandsStack.Peek() == "(")
+                                    if (operandsStack.Count != zeroLength && operandsStack.Peek() == "(")
                                     {
                                         operandsStack.Pop();
                                         break;
@@ -64,7 +62,7 @@ namespace SearchMethods
                         }
                         else if (PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())))
                         {
-                            while (operandsStack.Count != 0 && PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())) & expression[substringNumb].ToString() != "(")
+                            while (operandsStack.Count != zeroLength && PriorityChecker(expression[substringNumb]) <= PriorityChecker(char.Parse(operandsStack.Peek())) & expression[substringNumb].ToString() != "(")
                             {
                                 sRPE.Append(operandsStack.Pop());
                             }
@@ -74,14 +72,13 @@ namespace SearchMethods
                 }
                 if(substringNumb == expression.Length - 1)
                 {
-                    while(operandsStack.Count != 0 )
+                    while(operandsStack.Count != zeroLength)
                     {
                         if (operandsStack.Peek() == ")") operandsStack.Pop();
                         else sRPE.Append(operandsStack.Pop());
                     }
                 }
             }
-            //Console.WriteLine(sRPE);1
             return sRPE.ToString();
         }
 
@@ -99,40 +96,16 @@ namespace SearchMethods
              }
         }
 
-        public double Add(double x, double y)
-        {
-            double temp = x;
-            x = y;
-            y = temp;
-            return x + y;
-        }
-        public double Sub(double x, double y)
-        {
-            double temp = x;
-            x = y;
-            y = temp;
-            return x - y;
-        }
-        public double Mult(double x, double y)
-        {
-            double temp = x;
-            x = y;
-            y = temp;
-            return x * y;
-        }
-        public double Div(double x, double y)
-        {
-            double temp = x;
-            x = y;
-            y = temp;
-            return x / y;
-        }
+        public double Add(double x, double y) {return y + x;}
+        public double Sub(double x, double y) { return y - x;}
+        public double Mult(double x, double y) {return y * x;}
+        public double Div(double x, double y) {return y / x;}
 
         public double Calculate(string reversePolishEntry)
         {
             StringBuilder expressionOperator = new StringBuilder();
             Stack<string> operators = new Stack<string>();
-            double memoryNumb;
+            byte zeroLength = 0;
 
             for (int symbolNumb = 0; symbolNumb < reversePolishEntry.Length; symbolNumb++)
             {
@@ -144,7 +117,7 @@ namespace SearchMethods
                         expressionOperator.Clear();
                     }
                 }
-                else if (expressionOperator.Length > 0 & reversePolishEntry[symbolNumb] == ' ')
+                else if (expressionOperator.Length > zeroLength & reversePolishEntry[symbolNumb] == ' ')
                 {
                     operators.Push(expressionOperator.ToString());
                     expressionOperator.Clear();
