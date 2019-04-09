@@ -137,7 +137,7 @@ namespace SearchMethods
                             break;
                         case '/':
                             operators.Push(Div(double.Parse(operators.Pop()), double.Parse(operators.Pop())).ToString());
-                            break;
+                            break;1
                     }
                 }
             }
