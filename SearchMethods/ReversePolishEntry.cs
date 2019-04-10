@@ -142,7 +142,7 @@ namespace SearchMethods
                 }
             }
             return double.Parse(operators.Pop());
-            //1
+            //11111
         }
     }
 }
